@@ -1,0 +1,117 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>{% block title %}Mail{% endblock %}</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link rel="stylesheet" href="{% static '/cola_app/styles.css' %}">
+        {% block script %}
+        {% endblock %}
+    </head>
+    <body>
+        <section>
+		<div class="circle"></div>
+		<header>
+			<a href="#"><img src="https://github.com/JackCree/CSSexercices/blob/main/Coca-cola-landing-page/logo.png?raw=true" class="logo"></a>
+			<div class="toggle" onclick="toggleMenu()"></div>
+			<ul class="navigation">
+        <div id="marker"></div>
+				<li><a href="#">Home</a></li>
+				<li><a href="#">Menu</a></li>
+				<li><a href="#">What's New</a></li>
+				<li><a href="#">Contact</a></li>
+			</ul>
+		</header>
+		<div class="content">
+			<div class="textBox">
+				<h1>Taste the Feeling</h1>
+				<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+				<a href="#">Learn More</a>
+			</div>
+
+			<div class="imgBox">
+				<div class="swiper-container">
+				    <div class="swiper-wrapper">
+				      <div class="swiper-slide"><img src="https://github.com/JackCree/CSSexercices/blob/main/Coca-cola-landing-page/cocacola1.png?raw=true"></div>
+				      <div class="swiper-slide"><img src="https://github.com/JackCree/CSSexercices/blob/main/Coca-cola-landing-page/cocacola2.png?raw=true"></div>
+				      <div class="swiper-slide"><img src="https://github.com/JackCree/CSSexercices/blob/main/Coca-cola-landing-page/cocacola3.png?raw=true"></div>
+				      <div class="swiper-slide"><img src="https://github.com/JackCree/CSSexercices/blob/main/Coca-cola-landing-page/cocacola4.png?raw=true"></div>
+				      <div class="swiper-slide"><img src="https://github.com/JackCree/CSSexercices/blob/main/Coca-cola-landing-page/cocacola5.png?raw=true"></div>
+				      <div class="swiper-slide"><img src="https://github.com/JackCree/CSSexercices/blob/main/Coca-cola-landing-page/cocacola6.png?raw=true"></div>
+				    </div>
+				</div>
+			</div>
+		</div>
+
+		<ul class="sci">
+			<li><a href=""><i class="fa fa-facebook-f"></i></a></li>
+			<li><a href=""><i class="fa fa-twitter"></i></a></li>
+			<li><a href=""><i class="fa fa-instagram"></i></a></li>
+		</ul>
+		<span></span>
+	</section>
+
+	<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+	<script>
+	    var swiper = new Swiper('.swiper-container', {
+	      effect: 'coverflow',
+	      grabCursor: true,
+	      centeredSlides: true,
+	      autoplay: {
+	        delay: 2500,
+	        disableOnInteraction: false,
+	      },
+	      slidesPerView: 'auto',
+	      coverflowEffect: {
+	        rotate: 0,
+	        stretch: 0,
+	        depth: 200,
+	        modifier: 1,
+	        slideShadows: true,
+	      },
+	      pagination: {
+	        el: '.swiper-pagination',
+	      },
+	      loop: true,
+	    });
+
+	    function toggleMenu(){
+	      var menutoggle = document.querySelector('.toggle');
+	      var menu = document.querySelector('.navigation');
+	      menutoggle.classList.toggle('active');
+	      menu.classList.toggle('active')
+	    }
+	</script>
+	<script type="text/javascript">
+		function createBubble() {
+	    	const section = document.querySelector('section')
+	    	const createElement = document.createElement('span')
+	    	var size = Math.random() * 60;
+
+	    	createElement.style.width = 20 + size + 'px';
+	    	createElement.style.height = 20 + size + 'px';
+	    	createElement.style.left = Math.random() * innerWidth + "px";
+	    	section.appendChild(createElement);
+
+	    	setTimeout(() => {
+	    		createElement.remove()
+	    	}, 4000);
+	    }
+	    setInterval(createBubble, 50);
+
+    var marker = document.querySelector('#marker');
+	    var item = document.querySelectorAll('.navigation li a')
+
+	    function indicator(e) {
+	    	marker.style.left = e.offsetLeft+"px";
+	    	marker.style.width = e.offsetWidth+"px";
+	    }
+	    item.forEach(link => {
+	    	link.addEventListener('click', (e) => {
+	    		indicator(e.target);
+	    	})
+	    })
+	</script>
+    </body>
+</html>
