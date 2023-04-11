@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<head>
+    <link rel="stylesheet" href="style.css">
+</head>
+<section>
+		<div class="circle"></div>
+		<header>
+			<a href="#"><img src="https://github.com/JackCree/CSSexercices/blob/main/Coca-cola-landing-page/logo.png?raw=true" class="logo"></a>
+			<div class="toggle" onclick="toggleMenu()"></div>
+			<ul class="navigation">
+        <div id="marker"></div>
+				<li><a href="index.html">Home</a></li>
+				<li><a href="partners.html">Partners' Map</a></li>
+                <li><a href="">Annual report</a></li>
+				<li><a href="#">Contact</a></li>
+			</ul>
+		</header>
+        <body>
+		<div class="content">
+			<div class="textBox">
+				<h1>Taste the Feeling</h1>
+                <h2>Dear partners!</h2>
+				<p>Here you can find out  the market statistics and discover all essential details for futher cooperation.</p>
+				<a href="partners.html">Learn More</a>
+			</div>
+			<div class="imgBox">
+				<div class="swiper-container">
+				    <div class="swiper-wrapper">
+				      <div class="swiper-slide"><img src="https://github.com/JackCree/CSSexercices/blob/main/Coca-cola-landing-page/cocacola1.png?raw=true"></div>
+				      <div class="swiper-slide"><img src="https://github.com/JackCree/CSSexercices/blob/main/Coca-cola-landing-page/cocacola2.png?raw=true"></div>
+				      <div class="swiper-slide"><img src="https://github.com/JackCree/CSSexercices/blob/main/Coca-cola-landing-page/cocacola3.png?raw=true"></div>
+				      <div class="swiper-slide"><img src="https://github.com/JackCree/CSSexercices/blob/main/Coca-cola-landing-page/cocacola4.png?raw=true"></div>
+				      <div class="swiper-slide"><img src="https://github.com/JackCree/CSSexercices/blob/main/Coca-cola-landing-page/cocacola5.png?raw=true"></div>	
+				      <div class="swiper-slide"><img src="https://github.com/JackCree/CSSexercices/blob/main/Coca-cola-landing-page/cocacola6.png?raw=true"></div>		 
+				    </div>			    
+				</div>
+			</div>
+		</div>		
+		
+	</section>
+
+	<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+	<script>
+	    // var swiper = new Swiper('.swiper-container', {
+	    //   effect: 'coverflow',
+	    //   grabCursor: true,
+	    //   centeredSlides: true,
+	    //   autoplay: {
+	    //     delay: 2500,
+	    //     disableOnInteraction: false,
+	    //   },
+	    //   slidesPerView: 'auto',
+	    //   coverflowEffect: {
+	    //     rotate: 0,
+	    //     stretch: 0,
+	    //     depth: 200,
+	    //     modifier: 1,
+	    //     slideShadows: true,
+	    //   },
+	    //   pagination: {
+	    //     el: '.swiper-pagination',
+	    //   },
+	    //   loop: true,
+
+        // });
+        let slideIndex = 0;
+        showSlides();
+
+        function showSlides() {
+        let i;
+        let slides = document.getElementsByClassName("swiper-slide");
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        slideIndex++;
+        if (slideIndex > slides.length) {slideIndex = 1}
+        slides[slideIndex-1].style.display = "block";
+        setTimeout(showSlides, 2000); // Change image every 2 seconds
+        }
+
+	    function toggleMenu(){
+	      var menutoggle = document.querySelector('.toggle');
+	      var menu = document.querySelector('.navigation');
+	      menutoggle.classList.toggle('active');
+	      menu.classList.toggle('active') 
+	    }	    
+	</script>
+	<script type="text/javascript">
+		function createBubble() {
+	    	const section = document.querySelector('section')
+	    	const createElement = document.createElement('span')
+	    	var size = Math.random() * 60;
+	    	createElement.style.width = 20 + size + 'px';
+	    	createElement.style.height = 20 + size + 'px';
+	    	createElement.style.left = Math.random() * innerWidth + "px";
+	    	section.appendChild(createElement);
+
+	    	setTimeout(() => {
+	    		createElement.remove()
+	    	}, 4000);
+	    }
+	    setInterval(createBubble, 50);
+    
+    var marker = document.querySelector('#marker');
+	    var item = document.querySelectorAll('.navigation li a')
+
+	    function indicator(e) {
+	    	marker.style.left = e.offsetLeft+"px";
+	    	marker.style.width = e.offsetWidth+"px";
+	    }
+	    item.forEach(link => {
+	    	link.addEventListener('click', (e) => {
+	    		indicator(e.target);
+	    	})
+	    })
+	</script>
+    </body>
