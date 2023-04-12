@@ -1,49 +1,110 @@
+{% load static %}
 <!DOCTYPE html>
 <head>
-    <link rel="stylesheet" href="style_partners.css">
+    <link rel="stylesheet" href="{% static '/cola_app/partners.css' %}">
 </head>
 <section>
-		<div class="circle"></div>
+			<div class="circle"></div>
 		<header>
 			<a href="#"><img src="https://github.com/JackCree/CSSexercices/blob/main/Coca-cola-landing-page/logo.png?raw=true" class="logo"></a>
+			<div class="toggle" onclick="toggleMenu()"></div>
 			<ul class="navigation">
         <div id="marker"></div>
-				<li><a href="index.html">Home</a></li>
-				<li><a href="partners.html">Partners' Map</a></li>
-                <li><a href="#">Annual report</a></li>
+				<li><a href="{% url 'cola_app:index' %}">Home</a></li>
+				<li><a href="{% url 'cola_app:partners' %}">Partners' Map</a></li>
+                <li><a href="">Annual report</a></li>
 				<li><a href="#">Contact</a></li>
 			</ul>
 		</header>
         <body>
-                <div class="search">
-                    <div class="bar">
-                        <div class="icon">
-                            <i></i>
-                        </div>
-                    </div>
-                    <form class="in">
-                        <input type="text">
-                    </form>
-                    <div class="close"></div>
-                <em class="text">Type a location and hit <strong>Enter</strong></em>
-                
-            </div>
-            <!-- <div class="map">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d10935251.59298018!2d22.197967007688085!3d47.999427882908336!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40d1d9c154700e8f%3A0x1068488f64010!2sUkraine!5e0!3m2!1sen!2sua!4v1681195856707!5m2!1sen!2sua" width="600" height="450" style="border:0;" allowfullscreen=""  type="terrain" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-            </div> -->
+        <div id="form">
+            <form>
+  <input class="chosen-value" type="text" value="" placeholder="Choose city">
+  <ul class="value-list">
+    <li>Warsawa</li>
+    <li>Wroclaw</li>
+    <li>Gdynia</li>
+    <li>Przemyśl</li>
+    <li>Szczawnica</li>
+    <li>Liszki</li>
+    <li>Mosty</li>
+    <li>Rudziniec</li>
+    <li>Książenice</li>
+    <li>Świebodzice</li>
+    <li>Mrozy</li>
+    <li>Sucha beskidzka</li>
+    <li>Tarnowiec</li>
+    <li>Korytnica</li>
+    <li>Łebcz</li>
+    <li>Wad</li>
+  </ul>
+</form>
+        </div>>
+
 	</section>
-</script>
+</body>
 <script type="text/javascript">
-    function initMap() {
-        const map = new google.maps.Map(document.getElementById("map"), {
-          center: { lat: 40.76, lng: -73.983 },
-          zoom: 15,
-          mapTypeId: "satellite",
-        });
-      
-        map.setTilt(45);
+    const inputField = document.querySelector('.chosen-value');
+const dropdown = document.querySelector('.value-list');
+const dropdownArray = [... document.querySelectorAll('li')];
+console.log(typeof dropdownArray)
+dropdown.classList.add('open');
+inputField.focus(); // Demo purposes only
+let valueArray = [];
+dropdownArray.forEach(item => {
+  valueArray.push(item.textContent);
+});
+
+const closeDropdown = () => {
+  dropdown.classList.remove('open');
+}
+
+inputField.addEventListener('input', () => {
+  dropdown.classList.add('open');
+  let inputValue = inputField.value.toLowerCase();
+  let valueSubstring;
+  if (inputValue.length > 0) {
+    for (let j = 0; j < valueArray.length; j++) {
+      if (!(inputValue.substring(0, inputValue.length) === valueArray[j].substring(0, inputValue.length).toLowerCase())) {
+        dropdownArray[j].classList.add('closed');
+      } else {
+        dropdownArray[j].classList.remove('closed');
       }
-      
-      window.initMap = initMap;
+    }
+  } else {
+    for (let i = 0; i < dropdownArray.length; i++) {
+      dropdownArray[i].classList.remove('closed');
+    }
+  }
+});
+
+dropdownArray.forEach(item => {
+  item.addEventListener('click', (evt) => {
+    inputField.value = item.textContent;
+    dropdownArray.forEach(dropdown => {
+      dropdown.classList.add('closed');
+    });
+  });
+})
+
+inputField.addEventListener('focus', () => {
+   inputField.placeholder = 'Type the city';
+   dropdown.classList.add('open');
+   dropdownArray.forEach(dropdown => {
+     dropdown.classList.remove('closed');
+   });
+});
+
+inputField.addEventListener('blur', () => {
+   inputField.placeholder = 'Select city';
+  dropdown.classList.remove('open');
+});
+
+document.addEventListener('click', (evt) => {
+  const isDropdown = dropdown.contains(evt.target);
+  const isInput = inputField.contains(evt.target);
+  if (!isDropdown && !isInput) {
+    dropdown.classList.remove('open');
+  }
+});
       </script>
-    </body>
