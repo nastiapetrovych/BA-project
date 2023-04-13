@@ -1,35 +1,30 @@
 {% load static %}
 
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <title>{% block title %}Mail{% endblock %}</title>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-        <link rel="stylesheet" href="{% static '/cola_app/styles.css' %}">
-        {% block script %}
-        {% endblock %}
-    </head>
-    <body>
-        <section>
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'cola_app/styles.css' %}">
+</head>
+<section>
 		<div class="circle"></div>
 		<header>
 			<a href="#"><img src="https://github.com/JackCree/CSSexercices/blob/main/Coca-cola-landing-page/logo.png?raw=true" class="logo"></a>
 			<div class="toggle" onclick="toggleMenu()"></div>
 			<ul class="navigation">
         <div id="marker"></div>
-				<li><a href="#">Home</a></li>
-				<li><a href="#">Menu</a></li>
-				<li><a href="#">What's New</a></li>
+				<li><a href="{% url 'cola_app:index' %}">Home</a></li>
+				<li><a href="{% url 'cola_app:partners' %}">Partners' Map</a></li>
+                <li><a href="">Annual report</a></li>
 				<li><a href="#">Contact</a></li>
 			</ul>
 		</header>
+        <body>
 		<div class="content">
 			<div class="textBox">
 				<h1>Taste the Feeling</h1>
-				<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-				<a href="#">Learn More</a>
+                <h2>Dear partners!</h2>
+				<p>Here you can find out  the market statistics and discover all essential details for futher cooperation.</p>
+				<a href="{% url 'cola_app:partners' %}">Learn More</a>
 			</div>
-
 			<div class="imgBox">
 				<div class="swiper-container">
 				    <div class="swiper-wrapper">
@@ -44,37 +39,46 @@
 			</div>
 		</div>
 
-		<ul class="sci">
-			<li><a href=""><i class="fa fa-facebook-f"></i></a></li>
-			<li><a href=""><i class="fa fa-twitter"></i></a></li>
-			<li><a href=""><i class="fa fa-instagram"></i></a></li>
-		</ul>
-		<span></span>
 	</section>
 
 	<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 	<script>
-	    var swiper = new Swiper('.swiper-container', {
-	      effect: 'coverflow',
-	      grabCursor: true,
-	      centeredSlides: true,
-	      autoplay: {
-	        delay: 2500,
-	        disableOnInteraction: false,
-	      },
-	      slidesPerView: 'auto',
-	      coverflowEffect: {
-	        rotate: 0,
-	        stretch: 0,
-	        depth: 200,
-	        modifier: 1,
-	        slideShadows: true,
-	      },
-	      pagination: {
-	        el: '.swiper-pagination',
-	      },
-	      loop: true,
-	    });
+	    // var swiper = new Swiper('.swiper-container', {
+	    //   effect: 'coverflow',
+	    //   grabCursor: true,
+	    //   centeredSlides: true,
+	    //   autoplay: {
+	    //     delay: 2500,
+	    //     disableOnInteraction: false,
+	    //   },
+	    //   slidesPerView: 'auto',
+	    //   coverflowEffect: {
+	    //     rotate: 0,
+	    //     stretch: 0,
+	    //     depth: 200,
+	    //     modifier: 1,
+	    //     slideShadows: true,
+	    //   },
+	    //   pagination: {
+	    //     el: '.swiper-pagination',
+	    //   },
+	    //   loop: true,
+
+        // });
+        let slideIndex = 0;
+        showSlides();
+
+        function showSlides() {
+        let i;
+        let slides = document.getElementsByClassName("swiper-slide");
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        slideIndex++;
+        if (slideIndex > slides.length) {slideIndex = 1}
+        slides[slideIndex-1].style.display = "block";
+        setTimeout(showSlides, 2000); // Change image every 2 seconds
+        }
 
 	    function toggleMenu(){
 	      var menutoggle = document.querySelector('.toggle');
@@ -88,7 +92,6 @@
 	    	const section = document.querySelector('section')
 	    	const createElement = document.createElement('span')
 	    	var size = Math.random() * 60;
-
 	    	createElement.style.width = 20 + size + 'px';
 	    	createElement.style.height = 20 + size + 'px';
 	    	createElement.style.left = Math.random() * innerWidth + "px";
@@ -114,4 +117,3 @@
 	    })
 	</script>
     </body>
-</html>
